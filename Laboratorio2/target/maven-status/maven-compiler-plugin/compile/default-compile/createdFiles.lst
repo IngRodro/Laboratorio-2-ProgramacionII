@@ -1,0 +1,9 @@
+com\unab\edu\conexionmysql\Conexion.class
+com\unab\edu\DAO\ClsTipoUsuario.class
+com\unab\edu\DAO\ClsUsuario.class
+com\unab\edu\Entidades\Cuentausuario.class
+com\unab\edu\laboratorio2\frmLogueo.class
+com\unab\edu\Entidades\Usuario.class
+com\unab\edu\Entidades\TiposUsuario.class
+com\unab\edu\laboratorio2\frmLogueo$1.class
+com\unab\edu\laboratorio2\frmLogueo$2.class
