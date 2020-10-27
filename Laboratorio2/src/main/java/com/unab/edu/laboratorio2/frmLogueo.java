@@ -134,8 +134,11 @@ public class frmLogueo extends javax.swing.JFrame {
             if (variablecontenedoradeconsultabd == true) {
                 if(valueMember[cbtipos.getSelectedIndex()].equals("1"))
                 {
-                    
+                    JOptionPane.showMessageDialog(null, "Bienvenido Admin");
+                    frmAbono menuAdmin = new frmAbono();
+                    menuAdmin.setVisible(true);
                 }else{
+                    JOptionPane.showMessageDialog(null, "Bienvenido Usuario");
                     frmRetiro menuUsuario = new  frmRetiro();
                     menuUsuario.setVisible(true);
                     menuUsuario.IdUsuario = ClsUser.ObtenerIdUsuario(User, Pass);
