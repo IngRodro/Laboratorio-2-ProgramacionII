@@ -26,14 +26,17 @@ public class ClsUsuario {
     public ArrayList<Usuario> MostrarUsuarios(){
     ArrayList<Usuario> usuarios = new ArrayList<>();
         try {
-            CallableStatement Statement = conexion.prepareCall("SP_S_CuentasUsuario()");
+            CallableStatement Statement = conexion.prepareCall("call SP_S_Usuarios");
             ResultSet resultadoDeConsulta = Statement.executeQuery();
             while(resultadoDeConsulta.next()){
             Usuario usuario = new Usuario();
             usuario.setIdUsuario(resultadoDeConsulta.getInt("idUsuario"));
             usuario.setUsuario(resultadoDeConsulta.getString("Usuario"));
             usuario.setPassword(resultadoDeConsulta.getString("PassWord"));
-            usuario.setTipoUser(resultadoDeConsulta.getString("tipoUsuario"));
+            usuario.setId(resultadoDeConsulta.getInt("tipoUsuario"));
+            if(usuario.getId() == 2){
+                usuarios.add(usuario);
+            }
             }
             conexion.close();
         } catch (Exception e) {
@@ -100,6 +103,25 @@ public class ClsUsuario {
         return false;
     }
     
+    public int ObtenerIdUsuario(String usuario, String Pass) {
+        int ID = 0;
+        ArrayList<Usuario> ListaUsuarios = new ArrayList<>();
+        ArrayList<Usuario> ListarContra = new ArrayList<>();
+        try {
+            CallableStatement st = conexion.prepareCall("call SP_S_LOGUINUSUARIO(?,?)");
+            st.setString("pusuario", usuario);
+            st.setString("ppass", Pass);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                ID = rs.getInt("idUsuario");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+        return ID;
+    }
    
     
 }
