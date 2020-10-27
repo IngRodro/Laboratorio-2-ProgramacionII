@@ -5,6 +5,7 @@
  */
 package com.unab.edu.conexionmysql;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -26,6 +27,10 @@ public class Conexion {
 
     public Connection retornarConexion() {
         return conexion;
+    }
+
+    public CallableStatement prepareCall(String SP_I_CuentasUsuario) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

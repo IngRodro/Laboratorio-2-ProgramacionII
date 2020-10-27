@@ -22,6 +22,25 @@ public class ClsUsuario {
     
     Conexion cn = new Conexion();
     Connection conexion = cn.retornarConexion();
+    
+    public ArrayList<Usuario> MostrarUsuarios(){
+    ArrayList<Usuario> usuarios = new ArrayList<>();
+        try {
+            CallableStatement Statement = conexion.prepareCall("SP_S_CuentasUsuario()");
+            ResultSet resultadoDeConsulta = Statement.executeQuery();
+            while(resultadoDeConsulta.next()){
+            Usuario usuario = new Usuario();
+            usuario.setIdUsuario(resultadoDeConsulta.getInt("idUsuario"));
+            usuario.setUsuario(resultadoDeConsulta.getString("Usuario"));
+            usuario.setPassword(resultadoDeConsulta.getString("PassWord"));
+            usuario.setTipoUser(resultadoDeConsulta.getString("tipoUsuario"));
+            }
+            conexion.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return usuarios;
+    }
 
     public boolean LoguinUsuario(String usuario, String Pass, int tipoUser) {
         ArrayList<Usuario> ListaUsuarios = new ArrayList<>();
