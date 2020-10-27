@@ -132,7 +132,15 @@ public class frmLogueo extends javax.swing.JFrame {
         if (!User.isEmpty() && !Pass.isEmpty()) {
             var variablecontenedoradeconsultabd = ClsUser.LoguinUsuario(User, Pass, tipoUser);
             if (variablecontenedoradeconsultabd == true) {
-                JOptionPane.showMessageDialog(null, "Welcome");
+                if(valueMember[cbtipos.getSelectedIndex()].equals("1"))
+                {
+                    
+                }else{
+                    frmRetiro menuUsuario = new  frmRetiro();
+                    menuUsuario.setVisible(true);
+                    menuUsuario.IdUsuario = ClsUser.ObtenerIdUsuario(User, Pass);
+                    menuUsuario.MostrarCuentas();
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Datos Incorrectos");
             }

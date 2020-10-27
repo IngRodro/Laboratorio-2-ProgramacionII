@@ -4,41 +4,44 @@
  * and open the template in the editor.
  */
 package com.unab.edu.laboratorio2;
+
 import com.unab.edu.DAO.CLsCuentaUsuario;
 import com.unab.edu.DAO.ClsUsuario;
 import com.unab.edu.Entidades.Cuentausuario;
 import com.unab.edu.Entidades.Usuario;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
-
-
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author PREDATOR
  */
 public class frmAbono extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form frmAbono
      */
     public frmAbono() {
         initComponents();
+        DisplayMember();
     }
     String valueMember[];
-    int contador = 0;
-    void DisplayMember(){
+    int contador = 1;
+
+    void DisplayMember() {
         DefaultComboBoxModel cbdefaDefault = new DefaultComboBoxModel();
         ClsUsuario claseUsuario = new ClsUsuario();
         ArrayList<Usuario> Usuarios = claseUsuario.MostrarUsuarios();
-        valueMember = new String[Usuarios.size()];
-        String filas[] = new String[5];
-        for (var IterarDatosUsuarios : Usuarios){
-        filas[0] = String.valueOf(IterarDatosUsuarios.getIdUsuario());
-        filas[1] = IterarDatosUsuarios.getUsuario();
-        valueMember[contador]=filas[0];
-        cbdefaDefault.addElement(filas[1]);
-        contador++;
+        valueMember = new String[Usuarios.size() + 1];
+        String filas[] = new String[3];
+        cbdefaDefault.addElement("");
+        for (var IterarDatosUsuarios : Usuarios) {
+            filas[0] = String.valueOf(IterarDatosUsuarios.getIdUsuario());
+            filas[1] = IterarDatosUsuarios.getUsuario();
+            valueMember[contador] = filas[0];
+            cbdefaDefault.addElement(filas[1]);
+            contador++;
         }
         cbUsuario.setModel(cbdefaDefault);
     }
@@ -81,18 +84,17 @@ public class frmAbono extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCantidadAbono)
-                            .addComponent(jLabel2)
-                            .addComponent(cbUsuario, 0, 244, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
-                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bttnRealizarAbono)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCantidadAbono)
+                        .addComponent(jLabel2)
+                        .addComponent(cbUsuario, 0, 244, Short.MAX_VALUE))
+                    .addComponent(bttnRealizarAbono))
+                .addContainerGap(308, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(364, Short.MAX_VALUE)
+                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,12 +118,17 @@ public class frmAbono extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttnRealizarAbonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnRealizarAbonoActionPerformed
-        CLsCuentaUsuario cuentaUsuario = new CLsCuentaUsuario();
-        Cuentausuario cuentausuario = new Cuentausuario();
-        cuentausuario.setSaldo(Double.parseDouble(txtCantidadAbono.getText()));
-        cuentausuario.setIdUsuario(Integer.parseInt(valueMember[cbUsuario.getSelectedIndex()]));
-        cuentausuario.setFecha(txtFecha.getDate());
-        cuentaUsuario.RealizarAbono(cuentausuario);
+        try {
+            CLsCuentaUsuario cuentaUsuario = new CLsCuentaUsuario();
+            Cuentausuario cuentausuario = new Cuentausuario();
+            cuentausuario.setSaldo(Double.parseDouble(txtCantidadAbono.getText()));
+            cuentausuario.setIdUsuario(Integer.parseInt(valueMember[cbUsuario.getSelectedIndex()]));
+            cuentausuario.setFecha(txtFecha.getDate());
+            cuentausuario.setTransaccion(1);
+            cuentaUsuario.RealizarTransaccion(cuentausuario);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Verifique que toda la informacion es correcta");
+        }
     }//GEN-LAST:event_bttnRealizarAbonoActionPerformed
 
     /**
