@@ -77,7 +77,7 @@ public class frmLogueo extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/unab/edu/IMAGENES/b7120f4948141439cabf3ad11d361345-icono-de-banco-simple.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/b7120f4948141439cabf3ad11d361345-icono-de-banco-simple.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
