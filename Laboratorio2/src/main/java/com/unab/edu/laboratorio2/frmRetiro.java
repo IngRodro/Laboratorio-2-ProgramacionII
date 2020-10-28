@@ -147,7 +147,8 @@ public class frmRetiro extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         double Retiro = Integer.parseInt(txtRetiro.getText());
-        if (SaldoTotal >= Retiro) {
+        if(Retiro > 0){
+            if (SaldoTotal >= Retiro) {
             if ((Retiro % 5 == 0)) {
                 CLsCuentaUsuario clsCuentas = new CLsCuentaUsuario();
                 Cuentausuario cuenta = new Cuentausuario();
@@ -165,6 +166,9 @@ public class frmRetiro extends javax.swing.JFrame {
 
         } else {
             JOptionPane.showMessageDialog(null, "No cuenta con el suficiente Saldo para hacer el Retiro");
+        }
+        }else{
+            JOptionPane.showMessageDialog(null, "No puede introducir cantidades negativas");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
